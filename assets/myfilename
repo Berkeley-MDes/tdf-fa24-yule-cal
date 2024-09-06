@@ -1,4 +1,19 @@
-#some sort of heading
-[this is an image] (https://www.yulekim.bio)
-
-Here is some initial text
+# Some sort of heading
+## Sub-heading here
+<img align="center" /src="https://raw.githubusercontent.com/Berkeley-MDes/tdf-fa23-abigailxchen/main/neopixel-jpg"></img>
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+Type some regular text.
+Format:
+'[image title goes herel (image url goes here)
+1. one
+2. two
+3. three
