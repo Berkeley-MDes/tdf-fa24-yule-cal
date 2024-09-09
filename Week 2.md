@@ -1,4 +1,4 @@
-# Week 2
+# Week 2 of 09/09/2024
 # Sumamry
 
 Thie week, I explored Rhino 3D and Grasshopper more and tried to figure out the system of files shared.
