@@ -6,7 +6,7 @@ After Tuesday's class, I reviewed the class materials and Grasshopper notes in m
 ![Untitled](https://github.com/user-attachments/assets/22be9055-41cf-4fd0-a31a-e810b118a91a)
 [Link](https://www.figma.com/board/lUDPzkBLpdVS7jWdDrvnrN/Week-2_Yule_091224?node-id=0-1&t=dbdX0OTPoVb2UH4U-1)
 
-During the last class, I relearned how to adjust values using the Control Panel, which made it easier for me to fine-tune my desired design. Recently, a new iPhone was released. I have always thought that my phone is smaller than my hand size, so I'm considering purchasing the new iPhone Max model. Therefore, I adjusted the width, height, and thickness values to match the size of the iPhone Max.
+During the last class, I relearned how to adjust values using the Control Panel, which made it easier for me to fine-tune my desired design. By the way, recently, a new iPhone was released. I have always thought that my current phone is smaller than my hand size, so I'm considering purchasing the new, bigger iPhone model. Therefore, I adjusted the width, height, and thickness values to match the size of the iPhone Pro Max.
 
 ![Screenshot-2024-09-12-at-2 55 22 PM](https://github.com/user-attachments/assets/673758ef-d27a-4287-906a-52ebced9a6a7)
 
