@@ -6,6 +6,18 @@ After Tuesday's class, I reviewed the class materials and Grasshopper notes in m
 ![Untitled](https://github.com/user-attachments/assets/22be9055-41cf-4fd0-a31a-e810b118a91a)
 [Link](https://www.figma.com/board/lUDPzkBLpdVS7jWdDrvnrN/Week-2_Yule_091224?node-id=0-1&t=dbdX0OTPoVb2UH4U-1)
 
+During the last class, I relearned how to adjust values using the Control Panel, which made it easier for me to fine-tune my desired design. Recently, a new iPhone was released. I have always thought that my phone is smaller than my hand size, so I'm considering purchasing the new iPhone Max model. Therefore, I adjusted the width, height, and thickness values to match the size of the iPhone Max.
+
+![Screenshot-2024-09-12-at-2 55 22 PM](https://github.com/user-attachments/assets/673758ef-d27a-4287-906a-52ebced9a6a7)
+
+While working, I had an idea: what if the phone stand could allow viewing from multiple angles rather than being fixed at just one? So I focused on this, and after several attempts, I adjusted the values to enable the phone to be positioned at both lower and higher angles."
+
+<img width="970" alt="Screenshot 2024-09-12 at 2 55 58 PM" src="https://github.com/user-attachments/assets/22996ec8-5c54-4a4d-b6c8-3c1851ff6157">
+
+After baking the model, I was able to identify the design I wanted. However, there was one issue. To allow the phone to be placed at a more gradual angle, a groove, marked in red, needed to be carved out to fit the phone. Next week, I plan to study Rhino and try to create this groove to match my phone's thickness.
+
+<img width="973" alt="Screenshot 2024-09-12 at 2 57 15 PM" src="https://github.com/user-attachments/assets/92c0bddc-c082-4501-9c6c-6cd378a1d097">
+
 
 
 # Week of 09/09/2024
