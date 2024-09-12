@@ -1,4 +1,13 @@
 # Week 2
+# Week of 09/12/2024
+
+After Tuesday's class, I reviewed the class materials and Grasshopper notes in more detail to further structure the diagrams. I then worked on organizing and simplifying the diagrams for better clarity.
+
+![Untitled](https://github.com/user-attachments/assets/22be9055-41cf-4fd0-a31a-e810b118a91a)
+[Link](https://www.figma.com/board/lUDPzkBLpdVS7jWdDrvnrN/Week-2_Yule_091224?node-id=0-1&t=dbdX0OTPoVb2UH4U-1)
+
+
+
 # Week of 09/09/2024
 # Sumamry
 
