@@ -53,7 +53,7 @@ After baking the model, I was able to identify the design I wanted. However, the
 
 <img width="973" alt="Screenshot 2024-09-12 at 2 57 15 PM" src="https://github.com/user-attachments/assets/92c0bddc-c082-4501-9c6c-6cd378a1d097">
 
-# Sumamry
+# Week of 09/10/2024
 
 Thie week, I explored Rhino 3D and Grasshopper more and tried to figure out the system of files shared.
 
