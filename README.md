@@ -32,15 +32,19 @@ By categorizing my app usage, calculating the percentages, and using abstract ob
 # Week of 09/19/2024
 
 Project Overview: Bottle Holder Design
+
 This project started with a simple problem: after pouring water from my bottle, moisture would always collect at the bottom, leaving annoying marks on surfaces. I wanted to solve this everyday issue by designing a 3D-printed holder that would keep the bottle dry and stable on any surface.
 
-Challenges & Solutions
+Challenges & Solutions:
+
 I explored Grasshopper for computational design, trying different geometric combinations to create the final holder. Initially, I attempted to 3D-scan the bottle for precision but eventually switched to manual modeling after encountering several issues. Iteration was key—fine-tuning parameters in Grasshopper made a huge difference in getting the design right.
 
-Results & Feedback
+Results & Feedback:
+
 The final design worked as intended, solving the moisture issue while being functional and aesthetically pleasing. Feedback from peers encouraged me to experiment with more shapes, make the design adjustable for different bottle sizes, and explore more durable materials for better heat resistance.
 
-Conclusion
+Conclusion:
+
 This project was a great learning experience. I got hands-on with Grasshopper and Rhino, and despite some failed attempts along the way (looking at you, 3D-scanning!), the process taught me the value of persistence and iteration. It’s more than just a bottle holder—it’s about solving real problems with practical design and pushing my skills in computational design.
 
 For more details on this dynamic process, check out the video below!
