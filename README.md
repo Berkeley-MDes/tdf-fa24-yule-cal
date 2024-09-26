@@ -1,6 +1,6 @@
 # Week 4
 # Week of 09/26/2024
-My Interaction Ecosystems
+My Interaction Ecosystemss
 
 First, I started by identifying the digital devices I primarily use, which are my iPhone, iPad, and MacBook. I accessed the Screen Time feature on each device to review the apps I frequently use. From there, I categorized the apps into larger groups, such as Social, Entertainment, and Productivity & Finance. After determining these categories, I calculated the percentage of time spent on each category.
 
