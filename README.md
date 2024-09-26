@@ -6,6 +6,7 @@ For this assignment, I was tasked with analyzing my daily media and entertainmen
 
 Devices and Screen Time Analysis
 First, I began by identifying the digital devices I primarily use: my iPhone, iPad, and MacBook. I accessed the Screen Time feature on each of these devices to see which apps I use most frequently.
+
 <img src ="https://github.com/user-attachments/assets/a2ba3b13-c934-4670-9c07-fbbfb8d4b861" width = "70%">
 
 Next, I categorized these apps into larger groups, such as Social, Entertainment, and Productivity & Finance, and calculated the percentage of time spent in each category.
@@ -30,8 +31,21 @@ By categorizing my app usage, calculating the percentages, and using abstract ob
 # Week 3
 # Week of 09/19/2024
 
+Project Overview: Bottle Holder Design
+This project started with a simple problem: after pouring water from my bottle, moisture would always collect at the bottom, leaving annoying marks on surfaces. I wanted to solve this everyday issue by designing a 3D-printed holder that would keep the bottle dry and stable on any surface.
 
+Challenges & Solutions
+I explored Grasshopper for computational design, trying different geometric combinations to create the final holder. Initially, I attempted to 3D-scan the bottle for precision but eventually switched to manual modeling after encountering several issues. Iteration was key—fine-tuning parameters in Grasshopper made a huge difference in getting the design right.
 
+Results & Feedback
+The final design worked as intended, solving the moisture issue while being functional and aesthetically pleasing. Feedback from peers encouraged me to experiment with more shapes, make the design adjustable for different bottle sizes, and explore more durable materials for better heat resistance.
+
+Conclusion
+This project was a great learning experience. I got hands-on with Grasshopper and Rhino, and despite some failed attempts along the way (looking at you, 3D-scanning!), the process taught me the value of persistence and iteration. It’s more than just a bottle holder—it’s about solving real problems with practical design and pushing my skills in computational design.
+
+For more details on this dynamic process, check out the video below!
+
+https://github.com/user-attachments/assets/1a5ac7ce-e2b2-4dff-ae05-c7801ec9d7eb
 
 # Week 2
 # Week of 09/12/2024
