@@ -1,3 +1,23 @@
+# Week 4
+# Week of 09/26/2024
+My Interaction Ecosystems
+
+First, I started by identifying the digital devices I primarily use, which are my iPhone, iPad, and MacBook. I accessed the Screen Time feature on each device to review the apps I frequently use. From there, I categorized the apps into larger groups, such as Social, Entertainment, and Productivity & Finance. After determining these categories, I calculated the percentage of time spent on each category.
+
+Next, I moved on to abstract the data by thinking of symbolic objects that could represent the different categories and their proportions. For example, I considered objects like a tree, puzzle pieces, or a sand timer, with each part of the object representing the share of time allocated to each category. This process allowed me to visually and conceptually represent how my time is distributed across these different activities in my digital ecosystem.
+
+By breaking down my app usage and reflecting on abstract representations, I gained a clearer understanding of how my daily screen time is divided and how these activities interact within my digital life.
+
+![Untitled](https://github.com/user-attachments/assets/f6d4d61e-bbf2-4a32-b06c-2eb1b89996de)
+
+
+
+# Week 3
+# Week of 09/19/2024
+
+
+
+
 # Week 2
 # Week of 09/12/2024
 
