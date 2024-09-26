@@ -7,6 +7,10 @@ For this assignment, I was tasked with analyzing my daily media and entertainmen
 Devices and Screen Time Analysis
 First, I began by identifying the digital devices I primarily use: my iPhone, iPad, and MacBook. I accessed the Screen Time feature on each of these devices to see which apps I use most frequently.
 ![IMG_4D319CDD6CEA-1](https://github.com/user-attachments/assets/a2ba3b13-c934-4670-9c07-fbbfb8d4b861)
+<img src ="https://github.com/user-attachments/assets/a2ba3b13-c934-4670-9c07-fbbfb8d4b861" width = "40%">
+
+
+<img width="1020" alt="Screenshot 2024-09-08 at 9 17 16 PM" src="https://github.com/user-attachments/assets/eb3c7e68-68fc-4d7b-be55-22b491dd7588">
 
 Next, I categorized these apps into larger groups, such as Social, Entertainment, and Productivity & Finance, and calculated the percentage of time spent in each category.
 ![Untitled2](https://github.com/user-attachments/assets/37f76cb4-c4dd-47e4-8fe9-4aeeec5e5ad4)
