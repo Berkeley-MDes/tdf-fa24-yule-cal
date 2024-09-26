@@ -2,15 +2,30 @@
 # Week of 09/26/2024
 My Interaction Ecosystems
 
-First, I started by identifying the digital devices I primarily use, which are my iPhone, iPad, and MacBook. I accessed the Screen Time feature on each device to review the apps I frequently use. From there, I categorized the apps into larger groups, such as Social, Entertainment, and Productivity & Finance. After determining these categories, I calculated the percentage of time spent on each category.
+For this assignment, I was tasked with analyzing my daily media and entertainment ecosystem, focusing on how I use various devices and applications throughout the day. The goal was to break down my app usage, categorize it, and then creatively represent these categories using abstract symbols. This process helped me not only understand my screen time but also reflect on how different areas of my digital life interact with one another.
 
-Next, I moved on to abstract the data by thinking of symbolic objects that could represent the different categories and their proportions. For example, I considered objects like a tree, puzzle pieces, or a sand timer, with each part of the object representing the share of time allocated to each category. This process allowed me to visually and conceptually represent how my time is distributed across these different activities in my digital ecosystem.
+Devices and Screen Time Analysis
+First, I began by identifying the digital devices I primarily use: my iPhone, iPad, and MacBook. I accessed the Screen Time feature on each of these devices to see which apps I use most frequently.
+![IMG_4D319CDD6CEA-1](https://github.com/user-attachments/assets/a2ba3b13-c934-4670-9c07-fbbfb8d4b861)
 
-By breaking down my app usage and reflecting on abstract representations, I gained a clearer understanding of how my daily screen time is divided and how these activities interact within my digital life.
+Next, I categorized these apps into larger groups, such as Social, Entertainment, and Productivity & Finance, and calculated the percentage of time spent in each category.
+![Untitled2](https://github.com/user-attachments/assets/37f76cb4-c4dd-47e4-8fe9-4aeeec5e5ad4)
 
+Abstract Representation of Categories
+After categorizing the apps and calculating their usage percentages, I moved on to the creative step: selecting abstract objects that could represent these categories and their proportions.
+
+Gears (Social, Productivity & Finance, Utility)
+First, I chose gears to represent Social, Productivity & Finance, and Utility. The gears symbolize how these areas of my life are interconnected, with Social being the largest gear driving the others. This highlights how these categories work together to keep my digital life functioning smoothly.
+
+Tree (Entertainment, Shopping & Food, Education)
+Next, I used a tree metaphor to represent Entertainment, Shopping & Food, and Education. Entertainment, being the largest category, is depicted as the tree’s lush leaves, while Shopping & Food serves as the branches that support it. Education forms the roots, symbolizing foundational growth.
+
+Sand Timer (Social, Entertainment, Productivity & Finance)
+Finally, I chose a sand timer to show the relationship between Social, Entertainment, and Productivity & Finance. Social is the wide upper chamber, reflecting the largest portion of my time, while Entertainment flows through the middle, balancing with work. Productivity & Finance is concentrated at the bottom, symbolizing its essential but compressed role.
+
+Reflection and Alignment with Assignment Goals
+By categorizing my app usage, calculating the percentages, and using abstract objects like gears, a tree, and a sand timer, I was able to gain a deeper understanding of my digital habits. The assignment encouraged me to reflect not just on my screen time, but also on the balance and interaction between productivity, social activities, and entertainment.
 ![Untitled](https://github.com/user-attachments/assets/f6d4d61e-bbf2-4a32-b06c-2eb1b89996de)
-
-
 
 # Week 3
 # Week of 09/19/2024
