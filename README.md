@@ -1,3 +1,18 @@
+# Week 5
+# Week of 10/03/2024
+
+<img src ="https://github.com/user-attachments/assets/e21ae40e-6493-467f-a5ea-2ef7dc4aac54" width = "70%">
+
+This week, we received the PARTICLE customizable IoT kit. I’ve heard of Particle, a company that specializes in IoT (Internet of Things) solutions. They offer a complete platform for developing, connecting, and managing IoT devices, providing tools like development kits, cloud services, and connectivity options. Particle is well-known for its hardware modules, such as the Photon and Boron, which are designed for both hobbyist and industrial use, supporting everything from prototypes to large-scale deployments. 
+
+<img width="896" alt="Screenshot 2024-10-03 at 2 01 34 PM" src="https://github.com/user-attachments/assets/7e2d12c7-d7d4-4286-a4c9-1550766a4e7d">
+
+I’m already familiar with this type of IoT kit, as I have prior experience developing an IoT device for posture correction (more details can be found [here](https://www.yulekim.bio/keeper)). However, during that project, we used Arduino rather than Visual Studio Code, and my focus was more on user experience design and Project Manager rather than the actual coding itself.
+
+<img src ="https://github.com/user-attachments/assets/10b1aa4b-15a2-44f8-8359-e2517e90bd2c" width = "70%">
+
+Now, I’m working on getting accustomed to the Visual Studio Code platform. Next week, there’s a dedicated topic set, and I plan to dive deeper into this platform and experiment with something fun.
+
 # Week 4
 # Week of 09/26/2024
 My Interaction Ecosystems
