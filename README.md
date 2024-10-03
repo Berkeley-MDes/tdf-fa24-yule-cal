@@ -9,9 +9,9 @@ This week, we received the PARTICLE customizable IoT kit. I’ve heard of Partic
 
 I’m already familiar with this type of IoT kit, as I have prior experience developing an IoT device for posture correction (more details can be found [here](https://www.yulekim.bio/keeper)). However, during that project, we used Arduino rather than Visual Studio Code, and my focus was more on user experience design and Project Manager rather than the actual coding itself.
 
-<img src ="https://github.com/user-attachments/assets/10b1aa4b-15a2-44f8-8359-e2517e90bd2c" width = "70%">
+<img width="974" alt="Screenshot 2024-10-03 at 1 59 36 PM" src="https://github.com/user-attachments/assets/fc6a8450-5132-4211-9e26-1778897d6e6e">
 
-Now, I’m working on getting accustomed to the Visual Studio Code platform. Next week, there’s a dedicated topic set, and I plan to dive deeper into this platform and experiment with something fun.
+Last time, I connected the kit to my laptop and learned the basics, such as printing “Hello World” through Visual Studio Code. Now, I’m working on getting more familiar with the Visual Studio Code platform. Next week, there’s a specific topic set, and I plan to explore the platform further and experiment with something fun.
 
 # Week 4
 # Week of 09/26/2024
