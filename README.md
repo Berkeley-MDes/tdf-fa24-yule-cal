@@ -1,3 +1,20 @@
+# Week 6
+# Week of 10/10/2024
+
+<img width="496" alt="Screenshot 2024-10-10 at 1 38 34 PM" src="https://github.com/user-attachments/assets/6d9495e7-9fd6-4662-980b-92794ca73b8a">
+
+This week, we explored the Particle ecosystem in more depth. We learned how to control the Particle.io Photon 2 microcontroller, integrate hardware components for sensing and output, manage actuation and status relays, and use web APIs to gain insights into global activities or specific engagements. Additionally, we worked on code to tie all these elements together.
+
+<img src ="https://github.com/user-attachments/assets/ed855807-c65b-426e-b4de-feb6009a733c" width = "80%">
+
+We also need to organize a team for the Digital Ecosystem Project. I came up with an idea that I have always wanted to try to solve my issue. The concept is to monitor and provide haptic feedback for poor neck posture, especially during extended periods of computer or smartphone use. I formed a team with Josh, who also has experience struggling with this.
+
+<img src ="https://github.com/user-attachments/assets/b81dfa43-5fe5-4e49-b366-d85c758a18dd" width = "70%">
+
+We’ve developed a diagram that utilizes a gyroscope sensor and incorporates a calibration process. Since everyone has different postures due to variations in height and angle, the calibration allows the system to set a standard posture based on the user’s upright position. The system then uses this data as a reference, and if the user slouches for too long, it triggers a haptic motor as a form of feedback.
+
+Today, we’re presenting this idea in class and plan to incorporate feedback from our classmates and instructor.
+
 # Week 5
 # Week of 10/03/2024
 
