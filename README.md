@@ -24,6 +24,12 @@ We separated the board from the sensor components using wires for several reason
 4. LED - Verification
 - We ran a simple blinking code to test the LED, where the light blinks every second.
 
+
+https://github.com/user-attachments/assets/5029e72d-ffd7-40eb-863a-1497f84d6182
+
+5. Vibration Motor
+- Capable of producing various vibration effects
+
 I plan to complete the remaining tasks over the weekend and will continue fine-tuning the system based on feedback from the next class.
 
 
