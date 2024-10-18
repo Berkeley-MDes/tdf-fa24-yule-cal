@@ -1,3 +1,32 @@
+# Week 7
+# Week of 10/17/2024
+
+Preparation Process
+1. Board Update
+To ensure the board operates smoothly, we updated and initialized it.
+We separated the board from the sensor components using wires for several reasons:
+  - Flexibility in expanding functionality
+  - To prevent damage to the board’s pins
+
+<img src ="https://github.com/user-attachments/assets/b0c3d0e5-2caa-4308-9cb3-3f09566c78b2" width = "80%">
+<img src ="https://github.com/user-attachments/assets/8a1494c9-347d-447b-b0e5-85fcf7dcdae4" width = "80%">
+
+2. Hardware Soldering
+  - Soldered the QT connector board and pins
+  - Soldered the vibration motor and control board
+
+3. Development Process - Output
+  - Before integrating the entire program, we needed to verify the successful operation of each module (both hardware and software).
+  - The syntax structure is similar to Arduino, making it easier to work with.
+
+<img src ="https://github.com/user-attachments/assets/39925e8a-1ea4-4d00-bd5b-c2db7ce779ae" width = "80%">
+
+4. LED - Verification
+- We ran a simple blinking code to test the LED, where the light blinks every second.
+
+I plan to complete the remaining tasks over the weekend and will continue fine-tuning the system based on feedback from the next class.
+
+
 # Week 6
 # Week of 10/10/2024
 
