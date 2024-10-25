@@ -1,3 +1,10 @@
+# Week 8
+# Week of 10/24/2024
+We (Josh and I) are fully immersed in the 2nd TDF final work and making the video this week.
+
+Here is our work! :)
+[![TED Project 2_Keeper](https://img.youtube.com/vi/z6CSoZwMAkM.jpg)](https://www.youtube.com/watch?v=z6CSoZwMAkM)
+
 # Week 7
 # Week of 10/17/2024
 
