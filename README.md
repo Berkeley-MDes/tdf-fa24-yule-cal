@@ -1,3 +1,14 @@
+# Week 9
+# Week of 10/31/2024
+
+I approached ZeroWidth with curiosity and a bit of caution, knowing that each new tool brings its own specific learning curve. The structured, interactive nature of the class helped me get comfortable with the platform more easily, making the initial steps less daunting.
+
+For my first exploration, I set up a test flow, which I called “Trial Flow,” as a way to experiment and become familiar with ZeroWidth’s interface. I appreciated that its design had some similarities to tools I’ve used previously, such as Figma and Miro, with its organized layout and accessible icon-driven functionality. This intuitive setup let me dive straight into building without too much time spent figuring out the basics.
+
+As I began building my trial flow, I discovered how well ZeroWidth is designed for iterating on LLM workflows. The tool’s flexibility in managing multiple steps, organizing functions, and visualizing interactions between components made it clear how it supports rapid development. With each new element added, I felt my confidence grow, as the tool enabled me to test out a variety of LLM-based processes quickly and with clarity.
+
+Overall, this experience has given me a fresh perspective on the value of prototyping tools in the context of LLMs. I’m looking forward to leveraging ZeroWidth to test out practical LLM agent designs, which will allow me to merge theoretical knowledge with hands-on design capabilities in meaningful ways.
+
 # Week 8
 # Week of 10/24/2024
 We (Josh and I) are fully immersed in the 2nd TDF final work and making the video this week.
