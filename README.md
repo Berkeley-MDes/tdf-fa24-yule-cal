@@ -1,3 +1,33 @@
+# Week 10
+# Week of 11/07/2024
+
+Video: https://youtu.be/KAFnNR242yk?si=bHYh3BsRr4lKRL2H
+
+Project: AI-Powered Portfolio Summarization Agent on ZeroWidth
+Overview:
+This project focuses on creating an AI-powered agent using ZeroWidth that effectively summarizes my portfolio. Inspired by my desire to streamline the text-heavy nature of my portfolio, I developed an agent flow that condenses key information, making it concise and engaging for viewers.
+
+Process:
+Knowledge Base Setup:
+Uploaded my complete portfolio into the ZeroWidth Knowledge Base. This served as the foundational data source for the agent.
+
+Single Prompt Structure:
+Created a Single Prompt setup, connecting two main prompts:
+
+Prompt 1: Extracts specific project details, including project year and my role.
+Prompt 2: Generates responses with an engaging tone, adding subtle praise to highlight my achievements.
+Variable Adjustment:
+Integrated key variables (e.g., Date, Role, and Outcomes) to ensure that the agent provided structured and relevant information. Adjusted parameters like Number of Chunks and Similarity Threshold for better accuracy.
+
+Results:
+The agent successfully responds to queries about my work (e.g., “Any hardware work?” or “Any software work?”) with accurate details on project dates, roles, and outcomes, while maintaining an encouraging tone. This setup not only made the portfolio more approachable but also provided an engaging user experience that highlights my accomplishments.
+
+Reflections:
+ZeroWidth proved valuable for prototyping AI-driven service ideas. Although it feels like an advanced, AI-integrated version of Grasshopper, for simpler use cases, directly using GPT-4.0 might sometimes be more efficient.
+
+Future Directions:
+I aim to refine the agent further, exploring additional customizations to make the responses even more adaptive to specific queries.
+
 # Week 9
 # Week of 10/31/2024
 
