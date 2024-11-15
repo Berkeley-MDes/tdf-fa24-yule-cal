@@ -1,3 +1,21 @@
+# Week 11
+# Week of 11/14/2024
+
+Project: Initial Planning for TDF Project 4 - Mix, Master, Extend, and Evolve
+
+Summary: This week, I met with team members Chuhua (Charlie) Ding and Ryugwang (Josh) Jang to discuss ideas for Project 4. We focused on developing a concept that aligns with the project’s emphasis on blending technology with creative problem-solving in a connected ecosystem. After brainstorming, we agreed on an idea aimed at promoting healthier habits for children.
+
+<img src ="https://github.com/user-attachments/assets/11b422bf-dd01-4c37-b999-d4f4837c037f" width = "80%">
+
+Project Idea: Wearable Device with Calorie Tracking for Snack Access Control Our concept involves designing a wearable device that tracks a child’s calorie expenditure in real-time. This device would connect to a snack box with a lockable lid that only opens when a certain calorie threshold is met, encouraging kids to engage in more physical activity before accessing snacks. By integrating the Particle Photon2, we plan to establish cloud communication for data tracking, using sensors for activity monitoring, and an actuated mechanism to control snack box access.
+
+Next Steps:
+Refine the technical requirements for the wearable device and snack box system.
+Outline a series of experiments to test calorie tracking accuracy and the actuation of the snack box lock.
+Develop a project proposal including milestones and feasibility metrics for the “Design Showcase” on December 12th.
+Images of our brainstorming session will be added to this update.
+
+
 # Week 10
 # Week of 11/07/2024
 
