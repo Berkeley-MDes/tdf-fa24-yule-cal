@@ -65,7 +65,7 @@ Here is our work! :)
 
 [![TED Project 2_Keeper](https://img.youtube.com/vi/z6CSoZwMAkM.jpg)](https://www.youtube.com/watch?v=z6CSoZwMAkM)
 
-The details of the process
+The details of the process
 
 This project involves the Photon 2 microcontroller, an MPU6050 sensor, and a DRV2605 motor to detect posture deviations and provide real-time feedback. It uses:
 - A power button to toggle the system ON/OFF.
