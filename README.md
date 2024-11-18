@@ -200,6 +200,7 @@ void loop() {
 ```
 
 **5. Summary of Features**
+
 5-1. Power Control:
 - The power button toggles the system ON or OFF.
 - The LED indicates the system state.
@@ -214,6 +215,7 @@ void loop() {
 - Vibration feedback alerts the user when posture deviates significantly from the baseline.
 
 **6. Testing and Use Cases**
+
 6-1. Power ON:
 - Press the power button to activate the system. The LED turns on to indicate it's operational.
 
