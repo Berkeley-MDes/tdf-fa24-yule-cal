@@ -307,7 +307,7 @@ void loop() {
 7-3. Deviation Detection:
 - Move out of the standard posture. The system will trigger vibration feedback if deviations exceed the threshold.
 
-8. Final Code: Posture Monitoring System
+**8. Final Code: Posture Monitoring System**
 
 ```
 #include <Wire.h>
