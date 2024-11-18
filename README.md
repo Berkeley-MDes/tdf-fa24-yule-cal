@@ -1,4 +1,4 @@
-# Week 11
+ㄹ# Week 11
 # Week of 11/14/2024
 
 Project: Initial Planning for TDF Project 4 - Mix, Master, Extend, and Evolve
@@ -68,6 +68,7 @@ Here is our work! :)
 This project enhances a posture monitoring system built with the Photon 2 microcontroller by incorporating multi-level feedback using LED color changes and vibration intensity. The system uses an MPU6050 motion sensor to track deviations from a calibrated baseline posture and provides feedback based on the severity of the deviation.
 
 1. Features
+
 1-1. Calibration:
 - A calibration button defines the current posture as the standard baseline using accelerometer and gyroscope data.
 
