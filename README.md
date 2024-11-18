@@ -223,7 +223,7 @@ void loop() {
 - Assume a standard posture and press the calibration button. The system stores this posture as the baseline.
 
 6-3. Deviation Detection:
-Move out of the standard posture. The system will trigger vibration feedback if deviations exceed the threshold.
+- Move out of the standard posture. The system will trigger vibration feedback if deviations exceed the threshold.
 
 Final Code: Posture Monitoring System
 
