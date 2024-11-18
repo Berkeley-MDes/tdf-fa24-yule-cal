@@ -67,32 +67,30 @@ Here is our work! :)
 
 This project enhances a posture monitoring system built with the Photon 2 microcontroller by incorporating multi-level feedback using LED color changes and vibration intensity. The system uses an MPU6050 motion sensor to track deviations from a calibrated baseline posture and provides feedback based on the severity of the deviation.
 
-Features
-1. Calibration:
+1. Features
+1-1. Calibration:
 - A calibration button defines the current posture as the standard baseline using accelerometer and gyroscope data.
 
-2. Deviation Monitoring:
+1-2. Deviation Monitoring:
 - The system continuously monitors posture and compares it to the baseline.
 - Deviations are classified into three levels: mild, moderate, and severe.
 
-3. Multi-Level Feedback:
+1-3. Multi-Level Feedback:
 - LED Indicators:
-
 No deviation: No LED output (system is idle).
 Mild deviation: Yellow LED.
 Moderate deviation: Orange LED.
 Severe deviation: Red LED.
 
 - Vibration Feedback:
-
 Mild deviation: Light vibration.
 Moderate deviation: Medium vibration.
 Severe deviation: Strong vibration.
 
-4. Power Control:
+1-4. Power Control:
 - A power button toggles the system ON/OFF.
 
-**1. Initialization**
+**2. Initialization**
 - Set up the MPU6050 sensor, DRV2605 motor, and RGB LED pins. Configure the power and calibration buttons.
 
 ```
@@ -154,7 +152,7 @@ void setup() {
 
 ```
 
-**2. Calibration**
+**3. Calibration**
 - When the calibration button is pressed, the current posture is saved as the baseline. This data is used as the reference for detecting deviations.
 
 ```
@@ -180,7 +178,7 @@ void calculateBaseline() {
     Serial.println("Calibration complete.");
 }
 ```
-**3. Multi-Level Feedback**
+**4. Multi-Level Feedback**
 - Deviation Detection: The system calculates the absolute difference between real-time and baseline sensor values to determine the deviation level.
 
 ```
@@ -209,7 +207,7 @@ void checkDeviation() {
 }
 
 ```
-Feedback Levels:
+4-1. Feedback Levels:
 - Provide feedback using LED colors and vibration intensities based on the deviation level.
 
 ```
@@ -233,7 +231,7 @@ void resetFeedback() {
 
 ```
 
-RGB LED Control:
+4-2. RGB LED Control:
 - Set the color of the RGB LED.
 
 ```
@@ -245,7 +243,7 @@ void setLEDColor(int red, int green, int blue) {
 
 ```
 
-Vibration Feedback:
+4-3. Vibration Feedback:
 - Control the DRV2605 motor for different vibration intensities.
 
 ```
@@ -257,7 +255,7 @@ void playHapticFeedback(int effect) {
 
 ```
 
-**4. Main Control Logic**
+**5. Main Control Logic**
 - The main loop handles system power, calibration, and deviation monitoring.
 
 ```
@@ -284,31 +282,31 @@ void loop() {
 
 ```
 
-**5. Summary of Features**
+**6. Summary of Features**
 
-5-1. Power Control:
+6-1. Power Control:
 - A power button toggles the system ON/OFF.
 - LED indicates the system state.
 
-5-2. Calibration:
+6-2. Calibration:
 - A calibration button sets the baseline posture.
 
-5-3. Multi-Level Feedback:
+6-3. Multi-Level Feedback:
 - LED Colors: Indicate the severity of the deviation.
 - Vibration: Alert the user with varying intensities.
 
-**6. Testing and Use Cases**
+**7. Testing and Use Cases**
 
-6-1. Power ON:
+7-1. Power ON:
 - Press the power button to activate the system. The LED turns on to indicate it's operational.
 
-6-2. Calibration:
+7-2. Calibration:
 - Assume a standard posture and press the calibration button. The system stores this posture as the baseline.
 
-6-3. Deviation Detection:
+7-3. Deviation Detection:
 - Move out of the standard posture. The system will trigger vibration feedback if deviations exceed the threshold.
 
-Final Code: Posture Monitoring System
+8. Final Code: Posture Monitoring System
 
 ```
 #include <Wire.h>
