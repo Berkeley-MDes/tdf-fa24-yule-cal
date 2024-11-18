@@ -65,39 +65,192 @@ Here is our work! :)
 
 [![TED Project 2_Keeper](https://img.youtube.com/vi/z6CSoZwMAkM.jpg)](https://www.youtube.com/watch?v=z6CSoZwMAkM)
 
-+ The detail of process
+The details of the process
 
-This project involves using the Photon 2 microcontroller in conjunction with the MPU6050 motion sensor and the DRV2605 haptic feedback module. The system is designed to calibrate sensor baselines, detect significant deviations from the calibrated values, and provide feedback through a vibration motor. Below is an overview of the implementation process and its core functionalities.
+This project involves the Photon 2 microcontroller, an MPU6050 sensor, and a DRV2605 motor to detect posture deviations and provide real-time feedback. It uses:
+- A power button to toggle the system ON/OFF.
+- A calibration button to define a baseline for posture monitoring.
+- Vibration feedback via the DRV2605 motor when deviations exceed a threshold.
 
-1. System Setup and Initialization
-The Photon 2 is configured to read data from the MPU6050 sensor using I2C communication and to control the DRV2605 module for haptic feedback. Two buttons are utilized:
-
-- A power button to toggle the system state.
-- A calibration button to capture baseline sensor values.
-
-Key hardware definitions and initialization steps:
+**1. Initialization**
+Purpose:
+Set up the MPU6050 sensor, DRV2605 motor, and button pins. Ensure all components are ready for operation.
 
 ```
-#include <I2Cdev.h>
-#include <MPU6050.h>
 #include <Wire.h>
+#include <MPU6050.h>
 #include "Adafruit_DRV2605.h"
 
+// Pin definitions
 #define LED_PIN D8
 #define POWER_BUTTON_PIN D6
 #define CALIBRATION_BUTTON_PIN D7
 
-Adafruit_DRV2605 drv;
+// MPU6050 and DRV2605 objects
 MPU6050 accelgyro;
+Adafruit_DRV2605 drv;
 
-int16_t ax, ay, az;
-int16_t gx, gy, gz;
+// Sensor data
+int16_t ax, ay, az;  // Accelerometer
+int16_t gx, gy, gz;  // Gyroscope
 
-// Calibration baseline
+// State variables
+bool powerState = false;
+bool calibrationActive = false;
+
+void setup() {
+    pinMode(LED_PIN, OUTPUT);
+    pinMode(POWER_BUTTON_PIN, INPUT);
+    pinMode(CALIBRATION_BUTTON_PIN, INPUT);
+
+    Wire.begin();
+    Serial.begin(9600);
+
+    // Initialize MPU6050
+    accelgyro.initialize();
+    if (accelgyro.testConnection()) {
+        Serial.println("MPU6050 connected successfully.");
+    } else {
+        Serial.println("MPU6050 connection failed.");
+        while (1);
+    }
+
+    // Initialize DRV2605
+    if (!drv.begin()) {
+        Serial.println("DRV2605 initialization failed.");
+        while (1);
+    }
+}
+```
+**2. Calibration**
+Purpose:
+Set the current posture as the standard by averaging multiple sensor readings.
+```
+// Baseline data
 int16_t baselineAx = 0, baselineAy = 0, baselineAz = 0;
 int16_t baselineGx = 0, baselineGy = 0, baselineGz = 0;
 
-const int THRESHOLD = 500; // Deviation threshold for haptic feedback
+// Capture baseline posture
+void calculateBaseline() {
+    int sumAx = 0, sumAy = 0, sumAz = 0;
+    int sumGx = 0, sumGy = 0, sumGz = 0;
+
+    for (int i = 0; i < 5; i++) {
+        accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+        sumAx += ax; sumAy += ay; sumAz += az;
+        sumGx += gx; sumGy += gy; sumGz += gz;
+        delay(50); // Sampling delay
+    }
+
+    // Calculate average
+    baselineAx = sumAx / 5;
+    baselineAy = sumAy / 5;
+    baselineAz = sumAz / 5;
+    baselineGx = sumGx / 5;
+    baselineGy = sumGy / 5;
+    baselineGz = sumGz / 5;
+
+    calibrationActive = true; // Enable monitoring
+    Serial.println("Calibration complete.");
+}
+
+```
+**3. Vibration Feedback**
+Purpose:
+Alert the user when a significant deviation is detected.
+```
+void playHapticFeedback() {
+    drv.setWaveform(0, 53); // Moderate vibration
+    drv.setWaveform(1, 0);  // End vibration
+    drv.go();
+    delay(500); // Allow the effect to complete
+}
+```
+**4. Main Control Logic**
+Purpose:
+Handle system state changes, calibration, and monitoring.
+
+```
+void loop() {
+    // Handle power button
+    if (digitalRead(POWER_BUTTON_PIN) == HIGH) {
+        powerState = !powerState;
+        delay(500); // Debounce
+    }
+
+    if (powerState) {
+        digitalWrite(LED_PIN, HIGH); // System ON indication
+
+        // Calibration button logic
+        if (digitalRead(CALIBRATION_BUTTON_PIN) == HIGH) {
+            Serial.println("Calibration button pressed.");
+            calculateBaseline();
+        }
+
+        // Monitor posture if calibrated
+        if (calibrationActive) {
+            checkDeviation();
+        }
+    } else {
+        digitalWrite(LED_PIN, LOW); // System OFF indication
+    }
+
+    delay(100); // Loop delay
+}
+```
+
+**5. Summary of Features**
+5-1. Power Control:
+- The power button toggles the system ON or OFF.
+- The LED indicates the system state.
+
+5-2. Calibration:
+- The calibration button sets the current posture as the standard baseline.
+
+5-3. Deviation Monitoring:
+- Real-time monitoring detects deviations from the baseline posture using the accelerometer and gyroscope.
+
+5-4. Feedback:
+- Vibration feedback alerts the user when posture deviates significantly from the baseline.
+
+**6. Testing and Use Cases**
+6-1. Power ON:
+- Press the power button to activate the system. The LED turns on to indicate it's operational.
+
+6-2. Calibration:
+- Assume a standard posture and press the calibration button. The system stores this posture as the baseline.
+
+6-3. Deviation Detection:
+Move out of the standard posture. The system will trigger vibration feedback if deviations exceed the threshold.
+
+Final Code: Posture Monitoring System
+
+```
+#include <Wire.h>
+#include <MPU6050.h>
+#include "Adafruit_DRV2605.h"
+
+// Pin definitions
+#define LED_PIN D8
+#define POWER_BUTTON_PIN D6
+#define CALIBRATION_BUTTON_PIN D7
+
+// MPU6050 and DRV2605 objects
+MPU6050 accelgyro;
+Adafruit_DRV2605 drv;
+
+// Sensor data
+int16_t ax, ay, az;  // Accelerometer
+int16_t gx, gy, gz;  // Gyroscope
+
+// Baseline data
+int16_t baselineAx = 0, baselineAy = 0, baselineAz = 0;
+int16_t baselineGx = 0, baselineGy = 0, baselineGz = 0;
+
+// Constants
+const int THRESHOLD = 500; // Threshold for deviation
+bool powerState = false;   // System power state
+bool calibrationActive = false; // Indicates if the system is calibrated
 
 void setup() {
     pinMode(LED_PIN, OUTPUT);
@@ -114,21 +267,17 @@ void setup() {
         Serial.println("MPU6050 connected successfully.");
     } else {
         Serial.println("MPU6050 connection failed.");
+        while (1);
     }
 
     // Initialize DRV2605
     Serial.println("Initializing DRV2605...");
     if (!drv.begin()) {
-        Serial.println("Failed to initialize DRV2605.");
+        Serial.println("DRV2605 initialization failed.");
         while (1);
     }
 }
-```
-2. Calibration Process
-   
-When the calibration button is pressed, the system captures multiple sensor readings and calculates their average to establish baseline values. These values represent the sensor's "neutral" state.
 
-```
 void calculateBaseline() {
     int sumAx = 0, sumAy = 0, sumAz = 0;
     int sumGx = 0, sumGy = 0, sumGz = 0;
@@ -140,6 +289,7 @@ void calculateBaseline() {
         delay(50); // Sampling delay
     }
 
+    // Calculate average
     baselineAx = sumAx / 5;
     baselineAy = sumAy / 5;
     baselineAz = sumAz / 5;
@@ -147,23 +297,10 @@ void calculateBaseline() {
     baselineGy = sumGy / 5;
     baselineGz = sumGz / 5;
 
-    Serial.println("Calibration Complete:");
-    Serial.print("Accel Baseline (X/Y/Z): ");
-    Serial.print(baselineAx); Serial.print(", ");
-    Serial.print(baselineAy); Serial.print(", ");
-    Serial.println(baselineAz);
-    Serial.print("Gyro Baseline (X/Y/Z): ");
-    Serial.print(baselineGx); Serial.print(", ");
-    Serial.print(baselineGy); Serial.print(", ");
-    Serial.println(baselineGz);
+    calibrationActive = true; // Enable monitoring
+    Serial.println("Calibration complete.");
 }
-```
 
-3. Deviation Detection and Feedback
-   
-The system continuously monitors sensor values during operation. If a sensor reading deviates beyond the defined threshold (THRESHOLD = 500), the system triggers a vibration effect using the DRV2605.
-
-```
 void checkDeviation() {
     accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
 
@@ -173,59 +310,46 @@ void checkDeviation() {
         abs(gx - baselineGx) > THRESHOLD ||
         abs(gy - baselineGy) > THRESHOLD ||
         abs(gz - baselineGz) > THRESHOLD) {
-        Serial.println("Significant deviation detected.");
+        Serial.println("Posture deviation detected.");
         playHapticFeedback();
     }
 }
 
 void playHapticFeedback() {
-    drv.setWaveform(0, 53); // Set vibration effect
-    drv.setWaveform(1, 0);  // End effect
+    drv.setWaveform(0, 53); // Moderate vibration
+    drv.setWaveform(1, 0);  // End vibration
     drv.go();
-    delay(500);
+    delay(500); // Allow the effect to complete
 }
 
-```
-
-4. Main Operation Loop
-   
-The main loop() function coordinates the power toggle, calibration, and deviation detection processes. The system runs these checks continuously while powered on.
-
-```
 void loop() {
-    // Power button toggles system state
+    // Handle power button
     if (digitalRead(POWER_BUTTON_PIN) == HIGH) {
         powerState = !powerState;
-        delay(500); // Debounce delay
+        delay(500); // Debounce
     }
 
     if (powerState) {
-        digitalWrite(LED_PIN, HIGH); // Indicate system is powered on
+        digitalWrite(LED_PIN, HIGH); // System ON indication
 
-        // Handle calibration
+        // Calibration button logic
         if (digitalRead(CALIBRATION_BUTTON_PIN) == HIGH) {
             Serial.println("Calibration button pressed.");
             calculateBaseline();
         }
 
-        // Monitor for deviations
-        checkDeviation();
+        // Monitor posture if calibrated
+        if (calibrationActive) {
+            checkDeviation();
+        }
     } else {
-        digitalWrite(LED_PIN, LOW); // Indicate system is powered off
+        digitalWrite(LED_PIN, LOW); // System OFF indication
     }
 
-    delay(100);
+    delay(100); // Loop delay
 }
+
 ```
-
-5. Application and Use Cases
-   
-This system is suitable for applications requiring real-time motion monitoring and feedback, such as:
-
-Fitness trackers detecting abnormal movement patterns.
-Safety devices monitoring specific angular velocities or accelerations.
-Interactive systems requiring user feedback for out-of-range motion.
-The threshold value (THRESHOLD) and vibration pattern can be adjusted to suit specific application needs.
 
 
 
