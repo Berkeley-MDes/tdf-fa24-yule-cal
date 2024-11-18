@@ -71,6 +71,7 @@ The Photon was connected to the MPU6050 sensor for motion data and the DRV2605 m
 
 Then came the magical incantation, the code:
 
+```
 #include <I2Cdev.h>
 #include <MPU6050.h>
 #include <Wire.h>
@@ -92,13 +93,14 @@ int16_t gx, gy, gz;
 // Variables for button states
 bool powerState = false;
 bool calibrationState = false;
+```
 
 Here, the Photon 2 learned its roles. The LED became its eyes, signaling states. Buttons became its control mechanism, and the sensor provided the data needed for movement and rotation.
 
 Trials and Tribulations: Setting Up the MPU6050 and DRV2605
 it needed to speak the language of its companions: the MPU6050 and DRV2605. Using I2C communication, they synchronized their thoughts.
 
-
+```
 void setup() {
     pinMode(LED_PIN, OUTPUT);
     pinMode(POWER_BUTTON_PIN, INPUT);
@@ -124,6 +126,7 @@ void setup() {
         while (1);
     }
 }
+```
 
 The Photon 2 established communication with its teammates. The MPU6050 provided motion data, while the DRV2605 ensured the user could feel the system's responses.
 
@@ -133,6 +136,7 @@ The system needed to respond intuitively to user input. Two buttons guided the P
 Power Button: The On/Off Switch
 The power button toggled the system's state, signaling its readiness with the LED.
 
+```
 void toggleLED() {
     digitalWrite(LED_PIN, !digitalRead(LED_PIN));
 }
@@ -144,10 +148,12 @@ int handlePowerButton() {
     }
     return powerState;
 }
+```
 
 Calibration Button: The Quest for Accuracy
 When the calibration button was pressed, the Photon 2 read motion data multiple times, averaged it, and used this as a baseline for future operations.
 
+```
 int calculateAverage(int input, int samples) {
     int sum = 0;
     for (int i = 0; i < samples; i++) {
@@ -176,10 +182,12 @@ void handleCalibrationButton() {
         calibrationState = false;
     }
 }
+```
 
 The Reward: Real-Time Feedback
 With all systems ready, the Photon 2 entered its loop(), constantly monitoring button presses, reading sensor data, and toggling states.
 
+```
 void loop() {
     if (handlePowerButton()) {
         digitalWrite(LED_PIN, HIGH);
@@ -198,6 +206,7 @@ void loop() {
 
     delay(100); // Loop delay
 }
+```
 
 In this final act, the Photon 2 became fully operational. It toggled power, read motion data, and calibrated itself to ensure accuracy—all while providing haptic feedback to the user.
 
