@@ -65,8 +65,8 @@ Here is our work! :)
 
 [![TED Project 2_Keeper](https://img.youtube.com/vi/z6CSoZwMAkM.jpg)](https://www.youtube.com/watch?v=z6CSoZwMAkM)
 
-+
-The Call to Adventure: Setting Up the System
++ Calibration Process
+1. Setting Up the System
 The Photon was connected to the MPU6050 sensor for motion data and the DRV2605 module for haptic feedback. Two buttons—one for power and another for calibration—were added to the setup.
 
 Then came the magical incantation, the code:
@@ -131,7 +131,8 @@ void setup() {
 The Photon 2 established communication with its teammates. The MPU6050 provided motion data, while the DRV2605 ensured the user could feel the system's responses.
 
 Handling Power and Calibration
-The system needed to respond intuitively to user input. Two buttons guided the Photon 2 on its journey: one to toggle power and the other to initiate calibration.
+The system needed to respond intuitively to user input. Two buttons guided the Photon 2 on its journey: 
+one to toggle power and the other to initiate calibration.
 
 Power Button: The On/Off Switch
 The power button toggled the system's state, signaling its readiness with the LED.
