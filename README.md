@@ -66,10 +66,16 @@ Here is our work! :)
 [![TED Project 2_Keeper](https://img.youtube.com/vi/z6CSoZwMAkM.jpg)](https://www.youtube.com/watch?v=z6CSoZwMAkM)
 
 + Calibration Process
-1. Setting Up the System
-The Photon was connected to the MPU6050 sensor for motion data and the DRV2605 module for haptic feedback. Two buttons—one for power and another for calibration—were added to the setup.
 
-Then came the magical incantation, the code:
+This project involves using the Photon 2 microcontroller in conjunction with the MPU6050 motion sensor and the DRV2605 haptic feedback module. The system is designed to calibrate sensor baselines, detect significant deviations from the calibrated values, and provide feedback through a vibration motor. Below is an overview of the implementation process and its core functionalities.
+
+1. System Setup and Initialization
+The Photon 2 is configured to read data from the MPU6050 sensor using I2C communication and to control the DRV2605 module for haptic feedback. Two buttons are utilized:
+
+- A power button to toggle the system state.
+- A calibration button to capture baseline sensor values.
+
+Key hardware definitions and initialization steps:
 
 ```
 #include <I2Cdev.h>
@@ -77,36 +83,27 @@ Then came the magical incantation, the code:
 #include <Wire.h>
 #include "Adafruit_DRV2605.h"
 
-// Define hardware pins
 #define LED_PIN D8
 #define POWER_BUTTON_PIN D6
 #define CALIBRATION_BUTTON_PIN D7
 
-// Initialize objects
 Adafruit_DRV2605 drv;
 MPU6050 accelgyro;
 
-// Variables for sensor data
 int16_t ax, ay, az;
 int16_t gx, gy, gz;
 
-// Variables for button states
-bool powerState = false;
-bool calibrationState = false;
-```
+// Calibration baseline
+int16_t baselineAx = 0, baselineAy = 0, baselineAz = 0;
+int16_t baselineGx = 0, baselineGy = 0, baselineGz = 0;
 
-Here, the Photon 2 learned its roles. The LED became its eyes, signaling states. Buttons became its control mechanism, and the sensor provided the data needed for movement and rotation.
+const int THRESHOLD = 500; // Deviation threshold for haptic feedback
 
-Trials and Tribulations: Setting Up the MPU6050 and DRV2605
-it needed to speak the language of its companions: the MPU6050 and DRV2605. Using I2C communication, they synchronized their thoughts.
-
-```
 void setup() {
     pinMode(LED_PIN, OUTPUT);
     pinMode(POWER_BUTTON_PIN, INPUT);
     pinMode(CALIBRATION_BUTTON_PIN, INPUT);
 
-    // Initialize I2C communication
     Wire.begin();
     Serial.begin(9600);
 
@@ -116,100 +113,116 @@ void setup() {
     if (accelgyro.testConnection()) {
         Serial.println("MPU6050 connected successfully.");
     } else {
-        Serial.println("Failed to connect MPU6050.");
+        Serial.println("MPU6050 connection failed.");
     }
 
     // Initialize DRV2605
     Serial.println("Initializing DRV2605...");
     if (!drv.begin()) {
-        Serial.println("Failed to initialize DRV2605. Check connections.");
+        Serial.println("Failed to initialize DRV2605.");
         while (1);
     }
 }
 ```
-
-The Photon 2 established communication with its teammates. The MPU6050 provided motion data, while the DRV2605 ensured the user could feel the system's responses.
-
-Handling Power and Calibration
-The system needed to respond intuitively to user input. Two buttons guided the Photon 2 on its journey: 
-one to toggle power and the other to initiate calibration.
-
-Power Button: The On/Off Switch
-The power button toggled the system's state, signaling its readiness with the LED.
+2. Calibration Process
+When the calibration button is pressed, the system captures multiple sensor readings and calculates their average to establish baseline values. These values represent the sensor's "neutral" state.
 
 ```
-void toggleLED() {
-    digitalWrite(LED_PIN, !digitalRead(LED_PIN));
+void calculateBaseline() {
+    int sumAx = 0, sumAy = 0, sumAz = 0;
+    int sumGx = 0, sumGy = 0, sumGz = 0;
+
+    for (int i = 0; i < 5; i++) {
+        accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+        sumAx += ax; sumAy += ay; sumAz += az;
+        sumGx += gx; sumGy += gy; sumGz += gz;
+        delay(50); // Sampling delay
+    }
+
+    baselineAx = sumAx / 5;
+    baselineAy = sumAy / 5;
+    baselineAz = sumAz / 5;
+    baselineGx = sumGx / 5;
+    baselineGy = sumGy / 5;
+    baselineGz = sumGz / 5;
+
+    Serial.println("Calibration Complete:");
+    Serial.print("Accel Baseline (X/Y/Z): ");
+    Serial.print(baselineAx); Serial.print(", ");
+    Serial.print(baselineAy); Serial.print(", ");
+    Serial.println(baselineAz);
+    Serial.print("Gyro Baseline (X/Y/Z): ");
+    Serial.print(baselineGx); Serial.print(", ");
+    Serial.print(baselineGy); Serial.print(", ");
+    Serial.println(baselineGz);
+}
+```
+
+3. Deviation Detection and Feedback
+The system continuously monitors sensor values during operation. If a sensor reading deviates beyond the defined threshold (THRESHOLD = 500), the system triggers a vibration effect using the DRV2605.
+
+```
+void checkDeviation() {
+    accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+
+    if (abs(ax - baselineAx) > THRESHOLD ||
+        abs(ay - baselineAy) > THRESHOLD ||
+        abs(az - baselineAz) > THRESHOLD ||
+        abs(gx - baselineGx) > THRESHOLD ||
+        abs(gy - baselineGy) > THRESHOLD ||
+        abs(gz - baselineGz) > THRESHOLD) {
+        Serial.println("Significant deviation detected.");
+        playHapticFeedback();
+    }
 }
 
-int handlePowerButton() {
+void playHapticFeedback() {
+    drv.setWaveform(0, 53); // Set vibration effect
+    drv.setWaveform(1, 0);  // End effect
+    drv.go();
+    delay(500);
+}
+
+```
+
+4. Main Operation Loop
+The main loop() function coordinates the power toggle, calibration, and deviation detection processes. The system runs these checks continuously while powered on.
+
+```
+void loop() {
+    // Power button toggles system state
     if (digitalRead(POWER_BUTTON_PIN) == HIGH) {
         powerState = !powerState;
         delay(500); // Debounce delay
     }
-    return powerState;
-}
-```
 
-Calibration Button: The Quest for Accuracy
-When the calibration button was pressed, the Photon 2 read motion data multiple times, averaged it, and used this as a baseline for future operations.
+    if (powerState) {
+        digitalWrite(LED_PIN, HIGH); // Indicate system is powered on
 
-```
-int calculateAverage(int input, int samples) {
-    int sum = 0;
-    for (int i = 0; i < samples; i++) {
-        sum += input;
-        delay(10); // Sampling delay
-    }
-    return sum / samples;
-}
+        // Handle calibration
+        if (digitalRead(CALIBRATION_BUTTON_PIN) == HIGH) {
+            Serial.println("Calibration button pressed.");
+            calculateBaseline();
+        }
 
-void handleCalibrationButton() {
-    if (digitalRead(CALIBRATION_BUTTON_PIN) == HIGH) {
-        calibrationState = true;
-        Serial.println("Calibration started...");
-        
-        int avgAx = calculateAverage(ax, 5);
-        int avgAy = calculateAverage(ay, 5);
-        int avgAz = calculateAverage(az, 5);
-
-        Serial.print("Calibrated Values - Accel (X/Y/Z): ");
-        Serial.print(avgAx); Serial.print(", ");
-        Serial.print(avgAy); Serial.print(", ");
-        Serial.println(avgAz);
-
-        // Haptic feedback for success
-        playHapticEffect(53);
-        calibrationState = false;
-    }
-}
-```
-
-The Reward: Real-Time Feedback
-With all systems ready, the Photon 2 entered its loop(), constantly monitoring button presses, reading sensor data, and toggling states.
-
-```
-void loop() {
-    if (handlePowerButton()) {
-        digitalWrite(LED_PIN, HIGH);
-
-        // Read sensor data
-        accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
-        Serial.print("Accel (X/Y/Z): ");
-        Serial.print(ax); Serial.print(", ");
-        Serial.print(ay); Serial.print(", ");
-        Serial.println(az);
-
-        handleCalibrationButton();
+        // Monitor for deviations
+        checkDeviation();
     } else {
-        digitalWrite(LED_PIN, LOW);
+        digitalWrite(LED_PIN, LOW); // Indicate system is powered off
     }
 
-    delay(100); // Loop delay
+    delay(100);
 }
 ```
 
-In this final act, the Photon 2 became fully operational. It toggled power, read motion data, and calibrated itself to ensure accuracy—all while providing haptic feedback to the user.
+5. Application and Use Cases
+This system is suitable for applications requiring real-time motion monitoring and feedback, such as:
+
+Fitness trackers detecting abnormal movement patterns.
+Safety devices monitoring specific angular velocities or accelerations.
+Interactive systems requiring user feedback for out-of-range motion.
+The threshold value (THRESHOLD) and vibration pattern can be adjusted to suit specific application needs.
+
 
 
 # Week 7
