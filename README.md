@@ -65,16 +65,35 @@ Here is our work! :)
 
 [TDF Project 2 Keeper](https://www.youtube.com/watch?v=z6CSoZwMAkM)
 
-The details of the process
+This project enhances a posture monitoring system built with the Photon 2 microcontroller by incorporating multi-level feedback using LED color changes and vibration intensity. The system uses an MPU6050 motion sensor to track deviations from a calibrated baseline posture and provides feedback based on the severity of the deviation.
 
-This project involves the Photon 2 microcontroller, an MPU6050 sensor, and a DRV2605 motor to detect posture deviations and provide real-time feedback. It uses:
-- A power button to toggle the system ON/OFF.
-- A calibration button to define a baseline for posture monitoring.
-- Vibration feedback via the DRV2605 motor when deviations exceed a threshold.
+Features
+1. Calibration:
+- A calibration button defines the current posture as the standard baseline using accelerometer and gyroscope data.
+
+2. Deviation Monitoring:
+- The system continuously monitors posture and compares it to the baseline.
+- Deviations are classified into three levels: mild, moderate, and severe.
+
+3. Multi-Level Feedback:
+- LED Indicators:
+
+No deviation: No LED output (system is idle).
+Mild deviation: Yellow LED.
+Moderate deviation: Orange LED.
+Severe deviation: Red LED.
+
+- Vibration Feedback:
+
+Mild deviation: Light vibration.
+Moderate deviation: Medium vibration.
+Severe deviation: Strong vibration.
+
+4. Power Control:
+- A power button toggles the system ON/OFF.
 
 **1. Initialization**
-Purpose:
-Set up the MPU6050 sensor, DRV2605 motor, and button pins. Ensure all components are ready for operation.
+- Set up the MPU6050 sensor, DRV2605 motor, and RGB LED pins. Configure the power and calibration buttons.
 
 ```
 #include <Wire.h>
@@ -82,26 +101,37 @@ Set up the MPU6050 sensor, DRV2605 motor, and button pins. Ensure all components
 #include "Adafruit_DRV2605.h"
 
 // Pin definitions
-#define LED_PIN D8
 #define POWER_BUTTON_PIN D6
 #define CALIBRATION_BUTTON_PIN D7
+#define LED_RED_PIN D8
+#define LED_GREEN_PIN D9
+#define LED_BLUE_PIN D10
 
 // MPU6050 and DRV2605 objects
 MPU6050 accelgyro;
 Adafruit_DRV2605 drv;
 
 // Sensor data
-int16_t ax, ay, az;  // Accelerometer
-int16_t gx, gy, gz;  // Gyroscope
+int16_t ax, ay, az;
+int16_t gx, gy, gz;
 
-// State variables
+// Baseline data
+int16_t baselineAx = 0, baselineAy = 0, baselineAz = 0;
+int16_t baselineGx = 0, baselineGy = 0, baselineGz = 0;
+
+// Constants
+const int MILD_THRESHOLD = 500;    // Mild deviation threshold
+const int MODERATE_THRESHOLD = 1000; // Moderate deviation threshold
+const int SEVERE_THRESHOLD = 1500;  // Severe deviation threshold
 bool powerState = false;
 bool calibrationActive = false;
 
 void setup() {
-    pinMode(LED_PIN, OUTPUT);
     pinMode(POWER_BUTTON_PIN, INPUT);
     pinMode(CALIBRATION_BUTTON_PIN, INPUT);
+    pinMode(LED_RED_PIN, OUTPUT);
+    pinMode(LED_GREEN_PIN, OUTPUT);
+    pinMode(LED_BLUE_PIN, OUTPUT);
 
     Wire.begin();
     Serial.begin(9600);
@@ -121,16 +151,13 @@ void setup() {
         while (1);
     }
 }
-```
-**2. Calibration**
-Purpose:
-Set the current posture as the standard by averaging multiple sensor readings.
-```
-// Baseline data
-int16_t baselineAx = 0, baselineAy = 0, baselineAz = 0;
-int16_t baselineGx = 0, baselineGy = 0, baselineGz = 0;
 
-// Capture baseline posture
+```
+
+**2. Calibration**
+- When the calibration button is pressed, the current posture is saved as the baseline. This data is used as the reference for detecting deviations.
+
+```
 void calculateBaseline() {
     int sumAx = 0, sumAy = 0, sumAz = 0;
     int sumGx = 0, sumGy = 0, sumGz = 0;
@@ -139,10 +166,9 @@ void calculateBaseline() {
         accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
         sumAx += ax; sumAy += ay; sumAz += az;
         sumGx += gx; sumGy += gy; sumGz += gz;
-        delay(50); // Sampling delay
+        delay(50);
     }
 
-    // Calculate average
     baselineAx = sumAx / 5;
     baselineAy = sumAy / 5;
     baselineAz = sumAz / 5;
@@ -150,69 +176,126 @@ void calculateBaseline() {
     baselineGy = sumGy / 5;
     baselineGz = sumGz / 5;
 
-    calibrationActive = true; // Enable monitoring
+    calibrationActive = true;
     Serial.println("Calibration complete.");
+}
+```
+**3. Multi-Level Feedback**
+- Deviation Detection: The system calculates the absolute difference between real-time and baseline sensor values to determine the deviation level.
+
+```
+
+void checkDeviation() {
+    accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+
+    int deviation = max({
+        abs(ax - baselineAx),
+        abs(ay - baselineAy),
+        abs(az - baselineAz),
+        abs(gx - baselineGx),
+        abs(gy - baselineGy),
+        abs(gz - baselineGz)
+    });
+
+    if (deviation > SEVERE_THRESHOLD) {
+        provideFeedback("severe");
+    } else if (deviation > MODERATE_THRESHOLD) {
+        provideFeedback("moderate");
+    } else if (deviation > MILD_THRESHOLD) {
+        provideFeedback("mild");
+    } else {
+        resetFeedback();
+    }
 }
 
 ```
-**3. Vibration Feedback**
-Purpose:
-Alert the user when a significant deviation is detected.
+Feedback Levels:
+- Provide feedback using LED colors and vibration intensities based on the deviation level.
+
 ```
-void playHapticFeedback() {
-    drv.setWaveform(0, 53); // Moderate vibration
-    drv.setWaveform(1, 0);  // End vibration
-    drv.go();
-    delay(500); // Allow the effect to complete
+void provideFeedback(String level) {
+    if (level == "mild") {
+        setLEDColor(255, 255, 0); // Yellow
+        playHapticFeedback(30);  // Light vibration
+    } else if (level == "moderate") {
+        setLEDColor(255, 165, 0); // Orange
+        playHapticFeedback(50);  // Medium vibration
+    } else if (level == "severe") {
+        setLEDColor(255, 0, 0); // Red
+        playHapticFeedback(70);  // Strong vibration
+    }
 }
+
+void resetFeedback() {
+    setLEDColor(0, 0, 0); // Turn off LEDs
+    drv.stop();           // Stop vibration
+}
+
 ```
+
+RGB LED Control:
+- Set the color of the RGB LED.
+
+```
+void setLEDColor(int red, int green, int blue) {
+    analogWrite(LED_RED_PIN, red);
+    analogWrite(LED_GREEN_PIN, green);
+    analogWrite(LED_BLUE_PIN, blue);
+}
+
+```
+
+Vibration Feedback:
+- Control the DRV2605 motor for different vibration intensities.
+
+```
+void playHapticFeedback(int effect) {
+    drv.setWaveform(0, effect); // Set vibration effect
+    drv.setWaveform(1, 0);      // End vibration
+    drv.go();
+}
+
+```
+
 **4. Main Control Logic**
-Purpose:
-Handle system state changes, calibration, and monitoring.
+- The main loop handles system power, calibration, and deviation monitoring.
 
 ```
 void loop() {
-    // Handle power button
     if (digitalRead(POWER_BUTTON_PIN) == HIGH) {
         powerState = !powerState;
-        delay(500); // Debounce
+        delay(500);
     }
 
     if (powerState) {
-        digitalWrite(LED_PIN, HIGH); // System ON indication
-
-        // Calibration button logic
-        if (digitalRead(CALIBRATION_BUTTON_PIN) == HIGH) {
-            Serial.println("Calibration button pressed.");
-            calculateBaseline();
-        }
-
-        // Monitor posture if calibrated
         if (calibrationActive) {
             checkDeviation();
         }
+
+        if (digitalRead(CALIBRATION_BUTTON_PIN) == HIGH) {
+            calculateBaseline();
+        }
     } else {
-        digitalWrite(LED_PIN, LOW); // System OFF indication
+        resetFeedback(); // Ensure no feedback when the system is OFF
     }
 
-    delay(100); // Loop delay
+    delay(100);
 }
+
 ```
 
 **5. Summary of Features**
 
 5-1. Power Control:
-- The power button toggles the system ON or OFF.
-- The LED indicates the system state.
+- A power button toggles the system ON/OFF.
+- LED indicates the system state.
 
 5-2. Calibration:
-- The calibration button sets the current posture as the standard baseline.
+- A calibration button sets the baseline posture.
 
-5-3. Deviation Monitoring:
-- Real-time monitoring detects deviations from the baseline posture using the accelerometer and gyroscope.
-
-5-4. Feedback:
-- Vibration feedback alerts the user when posture deviates significantly from the baseline.
+5-3. Multi-Level Feedback:
+- LED Colors: Indicate the severity of the deviation.
+- Vibration: Alert the user with varying intensities.
 
 **6. Testing and Use Cases**
 
@@ -233,9 +316,11 @@ Final Code: Posture Monitoring System
 #include "Adafruit_DRV2605.h"
 
 // Pin definitions
-#define LED_PIN D8
 #define POWER_BUTTON_PIN D6
 #define CALIBRATION_BUTTON_PIN D7
+#define LED_RED_PIN D8
+#define LED_GREEN_PIN D9
+#define LED_BLUE_PIN D10
 
 // MPU6050 and DRV2605 objects
 MPU6050 accelgyro;
@@ -250,15 +335,21 @@ int16_t baselineAx = 0, baselineAy = 0, baselineAz = 0;
 int16_t baselineGx = 0, baselineGy = 0, baselineGz = 0;
 
 // Constants
-const int THRESHOLD = 500; // Threshold for deviation
-bool powerState = false;   // System power state
-bool calibrationActive = false; // Indicates if the system is calibrated
+const int MILD_THRESHOLD = 500;    // Mild deviation threshold
+const int MODERATE_THRESHOLD = 1000; // Moderate deviation threshold
+const int SEVERE_THRESHOLD = 1500;  // Severe deviation threshold
+bool powerState = false;
+bool calibrationActive = false;
 
 void setup() {
-    pinMode(LED_PIN, OUTPUT);
+    // Pin setup
     pinMode(POWER_BUTTON_PIN, INPUT);
     pinMode(CALIBRATION_BUTTON_PIN, INPUT);
+    pinMode(LED_RED_PIN, OUTPUT);
+    pinMode(LED_GREEN_PIN, OUTPUT);
+    pinMode(LED_BLUE_PIN, OUTPUT);
 
+    // Initialize I2C
     Wire.begin();
     Serial.begin(9600);
 
@@ -306,46 +397,72 @@ void calculateBaseline() {
 void checkDeviation() {
     accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
 
-    if (abs(ax - baselineAx) > THRESHOLD ||
-        abs(ay - baselineAy) > THRESHOLD ||
-        abs(az - baselineAz) > THRESHOLD ||
-        abs(gx - baselineGx) > THRESHOLD ||
-        abs(gy - baselineGy) > THRESHOLD ||
-        abs(gz - baselineGz) > THRESHOLD) {
-        Serial.println("Posture deviation detected.");
-        playHapticFeedback();
+    int deviation = max({
+        abs(ax - baselineAx),
+        abs(ay - baselineAy),
+        abs(az - baselineAz),
+        abs(gx - baselineGx),
+        abs(gy - baselineGy),
+        abs(gz - baselineGz)
+    });
+
+    if (deviation > SEVERE_THRESHOLD) {
+        provideFeedback("severe");
+    } else if (deviation > MODERATE_THRESHOLD) {
+        provideFeedback("moderate");
+    } else if (deviation > MILD_THRESHOLD) {
+        provideFeedback("mild");
+    } else {
+        resetFeedback();
     }
 }
 
-void playHapticFeedback() {
-    drv.setWaveform(0, 53); // Moderate vibration
-    drv.setWaveform(1, 0);  // End vibration
+void provideFeedback(String level) {
+    if (level == "mild") {
+        setLEDColor(255, 255, 0); // Yellow
+        playHapticFeedback(30);  // Light vibration
+    } else if (level == "moderate") {
+        setLEDColor(255, 165, 0); // Orange
+        playHapticFeedback(50);  // Medium vibration
+    } else if (level == "severe") {
+        setLEDColor(255, 0, 0); // Red
+        playHapticFeedback(70);  // Strong vibration
+    }
+}
+
+void resetFeedback() {
+    setLEDColor(0, 0, 0); // Turn off LEDs
+    drv.stop();           // Stop vibration
+}
+
+void setLEDColor(int red, int green, int blue) {
+    analogWrite(LED_RED_PIN, red);
+    analogWrite(LED_GREEN_PIN, green);
+    analogWrite(LED_BLUE_PIN, blue);
+}
+
+void playHapticFeedback(int effect) {
+    drv.setWaveform(0, effect); // Set vibration effect
+    drv.setWaveform(1, 0);      // End vibration
     drv.go();
-    delay(500); // Allow the effect to complete
 }
 
 void loop() {
-    // Handle power button
     if (digitalRead(POWER_BUTTON_PIN) == HIGH) {
         powerState = !powerState;
         delay(500); // Debounce
     }
 
     if (powerState) {
-        digitalWrite(LED_PIN, HIGH); // System ON indication
-
-        // Calibration button logic
-        if (digitalRead(CALIBRATION_BUTTON_PIN) == HIGH) {
-            Serial.println("Calibration button pressed.");
-            calculateBaseline();
-        }
-
-        // Monitor posture if calibrated
         if (calibrationActive) {
             checkDeviation();
         }
+
+        if (digitalRead(CALIBRATION_BUTTON_PIN) == HIGH) {
+            calculateBaseline();
+        }
     } else {
-        digitalWrite(LED_PIN, LOW); // System OFF indication
+        resetFeedback(); // Ensure no feedback when the system is OFF
     }
 
     delay(100); // Loop delay
