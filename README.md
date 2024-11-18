@@ -63,7 +63,7 @@ We (Josh and I) are fully immersed in the 2nd TDF final work and making the vide
 
 Here is our work! :)
 
-[![TED Project 2_Keeper](https://www.youtube.com/watch?v=z6CSoZwMAkM)
+[TDF Project 2 Keeper](https://www.youtube.com/watch?v=z6CSoZwMAkM)
 
 The details of the process
 
