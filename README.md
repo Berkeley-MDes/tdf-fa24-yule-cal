@@ -65,7 +65,7 @@ Here is our work! :)
 
 [![TED Project 2_Keeper](https://img.youtube.com/vi/z6CSoZwMAkM.jpg)](https://www.youtube.com/watch?v=z6CSoZwMAkM)
 
-+ Calibration Process
++ The detail of process
 
 This project involves using the Photon 2 microcontroller in conjunction with the MPU6050 motion sensor and the DRV2605 haptic feedback module. The system is designed to calibrate sensor baselines, detect significant deviations from the calibrated values, and provide feedback through a vibration motor. Below is an overview of the implementation process and its core functionalities.
 
@@ -125,6 +125,7 @@ void setup() {
 }
 ```
 2. Calibration Process
+   
 When the calibration button is pressed, the system captures multiple sensor readings and calculates their average to establish baseline values. These values represent the sensor's "neutral" state.
 
 ```
@@ -159,6 +160,7 @@ void calculateBaseline() {
 ```
 
 3. Deviation Detection and Feedback
+   
 The system continuously monitors sensor values during operation. If a sensor reading deviates beyond the defined threshold (THRESHOLD = 500), the system triggers a vibration effect using the DRV2605.
 
 ```
@@ -186,6 +188,7 @@ void playHapticFeedback() {
 ```
 
 4. Main Operation Loop
+   
 The main loop() function coordinates the power toggle, calibration, and deviation detection processes. The system runs these checks continuously while powered on.
 
 ```
@@ -216,6 +219,7 @@ void loop() {
 ```
 
 5. Application and Use Cases
+   
 This system is suitable for applications requiring real-time motion monitoring and feedback, such as:
 
 Fitness trackers detecting abnormal movement patterns.
