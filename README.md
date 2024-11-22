@@ -1,4 +1,32 @@
-ㄹ# Week 11
+# Week 12
+# Week of 11/21/2024
+
+**Project: SnackBox - Calorie-Aware Snacking Assistant**
+This week marked a important milestone for our SnackBox project. The concept began with a simple question: how can we make snacking healthier without sacrificing the joy it brings? Our answer is SnackBox—a smart, IoT-enabled assistant that helps users balance calorie intake and physical activity.
+
+**The updated concept:**
+SnackBox combines a mobile app, IoT sensors, and motorized mechanisms to create an interactive snacking experience. Users can scan snack barcodes via the app, which calculates calories and communicates with the SnackBox. The box dynamically adjusts its opening based on calories consumed and locks when thresholds are reached. Unlocking it requires physical activity, encouraging users to move more.
+
+**Key Contributions**
+Each team member has brought their expertise to life in this collaborative effort:
+
+Yule Kim (Me): I’m leading mobile app development, integrating the Apple Health API to transmit real-time calorie data and enabling barcode scanning to track snack calories using a reliable API. My role bridges the user experience with the IoT hardware, ensuring seamless data flow.
+Charlie Ding: Responsible for hardware design, including sensor placement, box mechanics, and motorized system prototyping.
+Josh Jang: Developing the hardware control code, ensuring seamless operation between sensors, actuators, and cloud-based data systems.
+
+**Next Steps**
+As we move forward, we are refining the system architecture and tackling key challenges:
+Developing and testing mobile app features for calorie and barcode data transmission.
+Calibrating IoT sensors and motors for accurate tracking and box adjustments.
+Integrating user feedback mechanisms to enhance the experience.
+
+**The Road Ahead**
+Our goal is to unveil a functional prototype by December 12, 2024, for the Design Showcase. We envision a SnackBox that not only helps users make healthier choices but also inspires a playful relationship with wellness. Through continuous iteration and teamwork, we will shape a final prototype.
+
+<img src ="https://github.com/user-attachments/assets/ec04d41e-f7ad-420f-8143-9b6f52122b8f" width = "70%">
+
+
+# Week 11
 # Week of 11/14/2024
 
 Project: Initial Planning for TDF Project 4 - Mix, Master, Extend, and Evolve
