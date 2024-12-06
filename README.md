@@ -1,3 +1,52 @@
+# Week 14
+# Week of 12/05/2024
+
+This week, our team had a productive meeting with Jeff to finalize the tasks and clarify individual responsibilities. Below is an overview of my assigned tasks and progress made:
+
+**Tasks Assigned to Me**
+- Add the number of snack items equivalent to specific kcal values.
+- Integrate Apple Health activity data into the app.
+- Design a new UI for weight entry, which syncs with the Apple Health app.
+- Implement data transmission for:
+    - User’s weight
+    - Calories of the entire snack portion
+    - Calorie consumption data
+- Set up Google Sheets API to send data to Josh (pending challenges).
+
+**Progress Summary**
+By December 5th, I completed all the assigned tasks and shared the updated app with the team.
+
+**Apple Health API Integration**
+- Successfully integrated Apple Health for activity and calorie data retrieval.
+- Encountered no significant issues during the process, thanks to HealthKit’s robust documentation.
+
+**Google Sheets API Implementation**
+- This task was slightly more challenging due to the lack of an official iOS SDK for Google Sheets and the requirement for Google Sign-In.
+- Researched solutions extensively and implemented the API successfully, enabling seamless data sharing with Josh.
+
+**New UI for Weight Entry**
+- Designed and implemented an intuitive UI for weight entry.
+- Ensured data (weight, height) is correctly pushed to Apple Health for further synchronization.
+
+**Challenges and Issues**
+After completing the tasks, I noticed a synchronization issue between the active energy data retrieved from Apple Health and the calorie calculations in the app.
+
+**Identified Problem:**
+The app does not correctly link the calories burned (active energy) from Apple Health to the calorie consumption tracking feature, leading to mismatched data.
+
+**Planned Resolution:**
+I will investigate the root cause of this issue over the weekend and aim to resolve it promptly.
+
+**Next Steps**
+Debug and fix the synchronization issue between active energy data from Apple Health and the app’s calorie tracking feature.
+Collaborate with team members to refine the app further, preparing for the Design Showcase on December 12th.
+
+**Demo Video:**
+https://github.com/user-attachments/assets/14700fc8-8fac-41d4-a43c-1b38228192c3
+
+Through consistent progress and collaboration, we are steadily moving towards delivering a functional and polished prototype for SnackBox.
+
+
 # Week 12
 # Week of 11/21/2024
 
